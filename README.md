@@ -1,16 +1,29 @@
-# Personal Finance Tracker - Stage 1
+# 💸 Finance Tracker App - Stage 2
 
-## Description
-A basic personal finance tracker app built with Next.js, React, MongoDB, and Recharts.  
-Allows users to add, edit, delete transactions and view monthly expense charts.
+This is a simple personal expense tracker built with **Next.js (App Router)**, **MongoDB**, and **Tailwind CSS**.
 
-## Features (Stage 1)
-- Add/Edit/Delete transactions (amount, date, description)  
-- Transaction list view  
-- Monthly expenses bar chart  
-- Basic form validation  
-- Responsive design  
+Stage 2 adds enhanced categorization and dashboard features on top of Stage 1.
 
-## Setup
-1. Clone the repo  
-2. Create a `.env.local` file with your MongoDB URI:
+---
+
+## ✅ Features
+
+### 🔁 Stage 1 Features
+- Add new transactions with amount, date, and description
+- Edit or delete existing transactions
+- All data stored in **MongoDB**
+- Client-server architecture using Next.js App Router
+
+### ➕ Stage 2 Additions
+- ✅ Predefined **transaction categories** (e.g., Food, Health, Transport, etc.)
+- ✅ Each transaction now includes a **category field**
+- ✅ **Pie Chart** visualizing expenses by category (using `recharts`)
+- ✅ **Dashboard Summary Cards**:
+  - **Total Expenses**
+  - **Category-wise Breakdown**
+  - **Recent Transactions**
+
+---
+
+## 📁 Folder Structure (Key Parts)
+
