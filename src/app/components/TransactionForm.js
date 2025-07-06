@@ -1,8 +1,16 @@
-// src/components/TransactionForm.js
-
 "use client";
 
 import { useState } from "react";
+
+const categories = [
+  "Food",
+  "Transport",
+  "Health",
+  "Entertainment",
+  "Utilities",
+  "Shopping",
+  "Others",
+];
 
 export default function TransactionForm({ onSubmit, transaction = null }) {
   const isEdit = !!transaction;
@@ -11,6 +19,7 @@ export default function TransactionForm({ onSubmit, transaction = null }) {
     amount: transaction?.amount || "",
     date: transaction?.date?.slice(0, 10) || "",
     description: transaction?.description || "",
+    category: transaction?.category || "Others",
   });
 
   const [error, setError] = useState("");
@@ -22,7 +31,7 @@ export default function TransactionForm({ onSubmit, transaction = null }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!form.amount || !form.date || !form.description) {
+    if (!form.amount || !form.date || !form.description || !form.category) {
       setError("All fields are required.");
       return;
     }
@@ -42,7 +51,7 @@ export default function TransactionForm({ onSubmit, transaction = null }) {
 
       if (data.success) {
         onSubmit();
-        setForm({ amount: "", date: "", description: "" });
+        setForm({ amount: "", date: "", description: "", category: "Others" });
         setError("");
       } else {
         setError(data.message || "Failed to save transaction.");
@@ -55,6 +64,7 @@ export default function TransactionForm({ onSubmit, transaction = null }) {
   return (
     <form onSubmit={handleSubmit} className="space-y-4 p-4 border rounded shadow">
       <h2 className="text-xl font-bold">{isEdit ? "Edit Transaction" : "Add Transaction"}</h2>
+
       <input
         name="amount"
         type="number"
@@ -78,6 +88,20 @@ export default function TransactionForm({ onSubmit, transaction = null }) {
         onChange={handleChange}
         className="w-full p-2 border rounded"
       />
+
+      <select
+        name="category"
+        value={form.category}
+        onChange={handleChange}
+        className="w-full p-2 border rounded"
+      >
+        {categories.map((cat) => (
+          <option key={cat} value={cat}>
+            {cat}
+          </option>
+        ))}
+      </select>
+
       {error && <p className="text-red-500 text-sm">{error}</p>}
       <button
         type="submit"

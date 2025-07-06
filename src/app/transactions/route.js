@@ -1,5 +1,3 @@
-// src/app/transaction/route.js
-
 import clientPromise from "@/lib/mongodb";
 import { ObjectId } from "mongodb";
 
@@ -21,8 +19,9 @@ export async function GET() {
 export async function POST(req) {
   try {
     const body = await req.json();
+    const { amount, date, description, category } = body;
 
-    if (!body.amount || !body.date || !body.description) {
+    if (!amount || !date || !description || !category) {
       return Response.json(
         { success: false, message: "Missing fields" },
         { status: 400 }
@@ -31,7 +30,12 @@ export async function POST(req) {
 
     const client = await clientPromise;
     const db = client.db("finance");
-    const result = await db.collection("transactions").insertOne(body);
+    const result = await db.collection("transactions").insertOne({
+      amount,
+      date,
+      description,
+      category,
+    });
 
     return Response.json({ success: true, data: result });
   } catch (error) {
@@ -67,13 +71,12 @@ export async function DELETE(req) {
   }
 }
 
-
 export async function PUT(req) {
   try {
     const body = await req.json();
-    const { id, amount, date, description } = body;
+    const { id, amount, date, description, category } = body;
 
-    if (!id || !amount || !date || !description) {
+    if (!id || !amount || !date || !description || !category) {
       return Response.json({ success: false, message: "Missing fields" }, { status: 400 });
     }
 
@@ -82,7 +85,7 @@ export async function PUT(req) {
 
     const result = await db.collection("transactions").updateOne(
       { _id: new ObjectId(id) },
-      { $set: { amount, date, description } }
+      { $set: { amount, date, description, category } }
     );
 
     if (result.modifiedCount === 1) {
