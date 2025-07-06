@@ -23,7 +23,5 @@ Stage 2 adds enhanced categorization and dashboard features on top of Stage 1.
   - **Category-wise Breakdown**
   - **Recent Transactions**
 
----
 
-## 📁 Folder Structure (Key Parts)
 
