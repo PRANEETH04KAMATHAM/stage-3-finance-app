@@ -9,6 +9,7 @@ import TransactionList from "./components/TransactionList";
 import MonthlyChart from "./components/MonthlyChart";
 import MonthlyBreakdown from "./components/MonthlyBreakdown";
 import CategoryPieChart from "./components/CategoryPieChart";
+import DashboardSummary from "./components/DashboardSummary";
 
 export default function Home() {
   const [refreshKey, setRefreshKey] = useState(0);
@@ -37,6 +38,10 @@ export default function Home() {
       <MonthlyBreakdown refresh={refreshKey} />
 
       <CategoryPieChart refresh={refreshKey} />
+
+ <div className="px-6 py-8"> 
+  <DashboardSummary refresh={refreshKey} />
+</div>
     </main>
   );
 }
